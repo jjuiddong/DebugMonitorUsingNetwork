@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="DbgMonitor"
-	ProjectGUID="{9F19EDA2-C161-4F01-A309-5D951D70B1F5}"
-	RootNamespace="DbgMonitor"
+	Name="GameClient"
+	ProjectGUID="{BE6BB6F1-F98E-4B1E-ABF8-81449F51C5B9}"
+	RootNamespace="GameClient"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -20,7 +20,7 @@
 			Name="Debug|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4"
+			ConfigurationType="1"
 			CharacterSet="1"
 			>
 			<Tool
@@ -42,11 +42,11 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;F:\Program Files (x86)\Nettention\ProudNet\include&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="2"
 				WarningLevel="3"
 				DebugInformationFormat="4"
 			/>
@@ -60,11 +60,18 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
+				Name="VCLinkerTool"
+				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;F:\Program Files (x86)\Nettention\ProudNet\lib\win32&quot;"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				TargetMachine="1"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -76,6 +83,9 @@
 				Name="VCFxCopTool"
 			/>
 			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
@@ -83,7 +93,7 @@
 			Name="Release|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4"
+			ConfigurationType="1"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -107,10 +117,10 @@
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="&quot;F:\Program Files (x86)\Nettention\ProudNet\include&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="2"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -124,11 +134,20 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
+				Name="VCLinkerTool"
+				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;F:\Program Files (x86)\Nettention\ProudNet\lib\win32&quot;"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				TargetMachine="1"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -138,6 +157,9 @@
 			/>
 			<Tool
 				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -153,20 +175,28 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\DbgMonitor.cpp"
+				RelativePath=".\GameClient.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\DbgMonitorClient.cpp"
+				RelativePath=".\stdafx.cpp"
 				>
-			</File>
-			<File
-				RelativePath=".\DbgMonitorServer.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\DbgWrap.cpp"
-				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
 			</File>
 		</Filter>
 		<Filter
@@ -175,19 +205,19 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\DbgMonitor.h"
+				RelativePath=".\GameClient.h"
 				>
 			</File>
 			<File
-				RelativePath=".\DbgMonitorClient.h"
+				RelativePath=".\Resource.h"
 				>
 			</File>
 			<File
-				RelativePath=".\DbgMonitorServer.h"
+				RelativePath=".\stdafx.h"
 				>
 			</File>
 			<File
-				RelativePath=".\DbgWrap.h"
+				RelativePath=".\targetver.h"
 				>
 			</File>
 		</Filter>
@@ -196,39 +226,17 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
-		</Filter>
-		<Filter
-			Name="PIDL"
-			>
 			<File
-				RelativePath=".\C2S.PIDL"
+				RelativePath=".\GameClient.ico"
 				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="$(InputName).PIDL 컴파일..."
-						CommandLine="&quot;F:\Program Files (x86)\Nettention\ProudNet\util\PIDL.exe&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
-						AdditionalDependencies="&quot;F:\Program Files (x86)\Nettention\ProudNet\util\PIDL.exe&quot;"
-						Outputs="$(InputDir)\$(InputName)_common.h;$(InputDir)\$(InputName)_proxy.cpp;$(InputDir)\$(InputName)_proxy.h;$(InputDir)\$(InputName)_stub.cpp;$(InputDir)\$(InputName)_stub.h"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\S2C.PIDL"
+				RelativePath=".\GameClient.rc"
 				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="$(InputName).PIDL 컴파일..."
-						CommandLine="&quot;F:\Program Files (x86)\Nettention\ProudNet\util\PIDL.exe&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
-						AdditionalDependencies="&quot;F:\Program Files (x86)\Nettention\ProudNet\util\PIDL.exe&quot;"
-						Outputs="$(InputDir)\$(InputName)_common.h;$(InputDir)\$(InputName)_proxy.cpp;$(InputDir)\$(InputName)_proxy.h;$(InputDir)\$(InputName)_stub.cpp;$(InputDir)\$(InputName)_stub.h"
-					/>
-				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\small.ico"
+				>
 			</File>
 		</Filter>
 		<File

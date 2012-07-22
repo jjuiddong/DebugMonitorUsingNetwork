@@ -28,7 +28,13 @@ namespace dbg
 	public:
 		bool Init(const Proud::String &ip);
 		bool FrameMove();
+		C2S::Proxy* GetProxy() { return m_pProxy; }
 		void SetState(eClientState state) { m_State = state; }
+
+		//---------------------------------------------------------------
+		// DebugMonitor Method
+		//---------------------------------------------------------------
+		void Message( int message );
 
 	};
 };

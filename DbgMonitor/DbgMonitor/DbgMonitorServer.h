@@ -22,8 +22,16 @@ namespace dbg
 		bool Init();
 		bool AddClient(Proud::HostID hostId);
 		bool RemoveClient(Proud::HostID hostId);
+		S2C::Proxy* GetProxy() { return m_pProxy; }
+
+		//---------------------------------------------------------------
+		// DebugMonitor Method
+		//---------------------------------------------------------------
+		void Trace( TCHAR *msg );
+
+
 
 		// Stub
-		DECRMI_C2S_Message;
+		DECRMI_C2S_Message override { return true; }
 	};
 };

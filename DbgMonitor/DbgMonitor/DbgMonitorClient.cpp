@@ -136,3 +136,9 @@ bool CDbgMonitorClient::FrameMove()
 	m_pClient->FrameMove();
 	return true;
 }
+
+
+void CDbgMonitorClient::Message( int message )
+{
+	m_pProxy->Message( Proud::HostID_Server, Proud::RmiContext::ReliableSend, message );
+}

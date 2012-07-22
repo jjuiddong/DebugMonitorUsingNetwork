@@ -117,8 +117,8 @@ bool CDbgMonitorServer::RemoveClient(Proud::HostID hostId)
 }
 
 
-DEFRMI_C2S_Message(CDbgMonitorServer)
+void CDbgMonitorServer::Trace( TCHAR *msg )
 {
-
-	return true;
+	for (int i=0; i < m_Clients.GetCount(); ++i)
+		m_pProxy->ConsoleString(m_Clients[ i], RmiContext::ReliableSend, Proud::String(msg) );
 }

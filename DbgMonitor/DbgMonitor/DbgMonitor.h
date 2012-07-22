@@ -15,12 +15,17 @@
 #endif
 
 
-#define DBGMONITOR_PORT		33334
-
-
-enum eDbgType
+namespace dbg
 {
-	DbgServer,
-	DbgClient,
-};
+	enum eDbgType
+	{
+		DbgServer,
+		DbgClient,
+	};
 
+	enum
+	{
+		DBGMONITOR_PORT=33334,
+	};
+
+};
