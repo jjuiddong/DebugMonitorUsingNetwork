@@ -9,9 +9,9 @@
 
 
 #ifdef _DEBUG
-#pragma comment(lib, "ProudNet_2008_Debug.lib" )
+#pragma comment(lib, "ProudNet_2008_Debug_static_CRT.lib" )
 #else
-#pragma comment(lib, "ProudNet_2008_Release.lib" )
+#pragma comment(lib, "ProudNet_2008_Release_static_CRT.lib" )
 #endif
 
 

@@ -6,9 +6,9 @@ using namespace dbg;
 
 namespace dbg
 {
-	eDbgType m_Type;
-	CDbgMonitorServer *m_pSvr; // reference, 메모리제거는 여기서 함
-	CDbgMonitorClient *m_pClt; // reference, 메모리제거는 여기서 함
+	eDbgType m_Type = DbgClient;
+	CDbgMonitorServer *m_pSvr = NULL; // reference, 메모리제거는 여기서 함
+	CDbgMonitorClient *m_pClt = NULL; // reference, 메모리제거는 여기서 함
 
 };
 
@@ -16,6 +16,9 @@ namespace dbg
 // Client로 동작할때만 ip값이 필요하다.
 void dbg::Init( eDbgType type, CDbgMonitorServer *pSvr, CDbgMonitorClient *pClt, const std::string &ip )
 {
+	m_Type = type;
+	m_pSvr = pSvr;
+	m_pClt = pClt;
 	if (DbgServer == m_Type)
 	{
 		if (m_pSvr)

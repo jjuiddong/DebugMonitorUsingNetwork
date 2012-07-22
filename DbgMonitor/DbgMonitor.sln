@@ -8,6 +8,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameClient", "GameClient\Ga
 		{9F19EDA2-C161-4F01-A309-5D951D70B1F5} = {9F19EDA2-C161-4F01-A309-5D951D70B1F5}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DebugMonitor", "DebugMonitor\DebugMonitor.vcproj", "{3BA60793-74AA-4180-85EA-3652B58B7819}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9F19EDA2-C161-4F01-A309-5D951D70B1F5} = {9F19EDA2-C161-4F01-A309-5D951D70B1F5}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -22,6 +27,10 @@ Global
 		{BE6BB6F1-F98E-4B1E-ABF8-81449F51C5B9}.Debug|Win32.Build.0 = Debug|Win32
 		{BE6BB6F1-F98E-4B1E-ABF8-81449F51C5B9}.Release|Win32.ActiveCfg = Release|Win32
 		{BE6BB6F1-F98E-4B1E-ABF8-81449F51C5B9}.Release|Win32.Build.0 = Release|Win32
+		{3BA60793-74AA-4180-85EA-3652B58B7819}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3BA60793-74AA-4180-85EA-3652B58B7819}.Debug|Win32.Build.0 = Debug|Win32
+		{3BA60793-74AA-4180-85EA-3652B58B7819}.Release|Win32.ActiveCfg = Release|Win32
+		{3BA60793-74AA-4180-85EA-3652B58B7819}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
