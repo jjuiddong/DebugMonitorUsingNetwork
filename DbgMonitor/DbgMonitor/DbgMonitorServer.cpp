@@ -9,6 +9,9 @@ using namespace dbg;
 using namespace Proud;
 
 
+
+
+
 namespace dbg
 {
 	class CServerEventSink : public Proud::INetServerEvent
@@ -26,12 +29,18 @@ namespace dbg
 		virtual void OnClientJoin(Proud::CNetClientInfo *clientInfo) OVERRIDE
 		{
 			if (m_pServer)
+			{
 				m_pServer->AddClient(clientInfo->m_HostID);
+				m_pServer->ClientJoin(clientInfo->m_HostID);
+			}
 		}
 		virtual void OnClientLeave( Proud::CNetClientInfo *clientInfo, Proud::ErrorInfo *errorInfo, const Proud::ByteArray& comment ) OVERRIDE
 		{
 			if (m_pServer)
+			{
 				m_pServer->RemoveClient(clientInfo->m_HostID);
+				m_pServer->ClientLeave(clientInfo->m_HostID);
+			}
 		}
 		virtual bool OnConnectionRequest(Proud::AddrPort clientAddr, Proud::ByteArray &userDataFromClient, Proud::ByteArray &reply) OVERRIDE
 		{
@@ -117,8 +126,20 @@ bool CDbgMonitorServer::RemoveClient(Proud::HostID hostId)
 }
 
 
-void CDbgMonitorServer::Trace( TCHAR *msg )
+
+void CDbgMonitorServer::Trace( const TCHAR* msg )
 {
 	for (int i=0; i < m_Clients.GetCount(); ++i)
-		m_pProxy->ConsoleString(m_Clients[ i], RmiContext::ReliableSend, Proud::String(msg) );
+		m_pProxy->ConsoleString(m_Clients[ i], RmiContext::ReliableSend, dbg::Console_General, 0, Proud::String(msg) );
 }
+void CDbgMonitorServer::Trace_Scaleform( int movieID, const TCHAR* msg )
+{
+	for (int i=0; i < m_Clients.GetCount(); ++i)
+		m_pProxy->ConsoleString(m_Clients[ i], RmiContext::ReliableSend, dbg::Console_Scaleform, movieID, Proud::String(msg) );
+}
+void CDbgMonitorServer::Trace_Network( const TCHAR* msg )
+{
+	for (int i=0; i < m_Clients.GetCount(); ++i)
+		m_pProxy->ConsoleString(m_Clients[ i], RmiContext::ReliableSend, dbg::Console_Network, 0, Proud::String(msg) );
+}
+

@@ -14,9 +14,9 @@ namespace dbg
 
 		enum eClientState
 		{
-			WaitConnect,
-			Connect,
-			Close
+			State_WaitConnect,
+			State_Connect,
+			State_Close
 		};
 
 	protected:
@@ -26,10 +26,12 @@ namespace dbg
 		eClientState m_State;
 
 	public:
-		bool Init(const Proud::String &ip);
-		bool FrameMove();
-		C2S::Proxy* GetProxy() { return m_pProxy; }
-		void SetState(eClientState state) { m_State = state; }
+		bool			Init(const Proud::String &ip);
+		bool			FrameMove();
+		virtual void	Connect() {}
+		virtual void	DisConnect() {}
+		C2S::Proxy*		GetProxy() { return m_pProxy; }
+		void			SetState(eClientState state) { m_State = state; }
 
 		//---------------------------------------------------------------
 		// DebugMonitor Method

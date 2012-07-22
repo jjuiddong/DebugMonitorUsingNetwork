@@ -15,12 +15,30 @@
 #endif
 
 
+// 가변인자값을 받아서 버퍼에 저장한다.
+#define VA_MAKE_M(buffer, format)\
+	TCHAR buffer[256];\
+{\
+	va_list ap;\
+	va_start(ap, format);\
+	_vstprintf_s(buffer, format, ap);\
+	va_end(ap);\
+}\
+
+
 namespace dbg
 {
 	enum eDbgType
 	{
 		DbgServer,
 		DbgClient,
+	};
+
+	enum eConsoleType
+	{
+		Console_General,
+		Console_Network,
+		Console_Scaleform,		
 	};
 
 	enum

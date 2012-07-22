@@ -8,9 +8,9 @@ namespace S2C{
 	class Proxy : public Proud::IRmiProxy
 	{
 	public:
-virtual bool ConsoleString(Proud::HostID remote,Proud::RmiContext &rmiContext,const Proud::String &message)
+virtual bool ConsoleString(Proud::HostID remote,Proud::RmiContext &rmiContext,const int &consoleType,const int &movieID,const Proud::String &message)
  SEALED; 
-	virtual bool ConsoleString(const Proud::HostID *remotes,int remoteCount,Proud::RmiContext &rmiContext,const Proud::String &message)
+	virtual bool ConsoleString(const Proud::HostID *remotes,int remoteCount,Proud::RmiContext &rmiContext,const int &consoleType,const int &movieID,const Proud::String &message)
  SEALED;
 
 // Rmi name 선언

@@ -3,7 +3,7 @@
 
 
 namespace S2C{
-bool Proxy::ConsoleString(Proud::HostID remote,Proud::RmiContext &rmiContext,const Proud::String &message)
+bool Proxy::ConsoleString(Proud::HostID remote,Proud::RmiContext &rmiContext,const int &consoleType,const int &movieID,const Proud::String &message)
 {
 // 여기서 더이상 main lock을 하지 않음.
     // Proud::CriticalSectionLock __lock(m_core->GetCritSec(),true);
@@ -13,13 +13,15 @@ bool Proxy::ConsoleString(Proud::HostID remote,Proud::RmiContext &rmiContext,con
 	Proud::RmiID __msgid=(Proud::RmiID)Rmi_ConsoleString;
 	__msg.Write(__msgid); 
 	
+__msg << consoleType;
+__msg << movieID;
 __msg << message;
 
 		return RmiSend(&remote,1,rmiContext,__msg,
 			RmiName_ConsoleString, (Proud::RmiID)Rmi_ConsoleString);
 	}
 
-	bool Proxy::ConsoleString(const Proud::HostID *remotes,int remoteCount,Proud::RmiContext &rmiContext,const Proud::String &message)
+	bool Proxy::ConsoleString(const Proud::HostID *remotes,int remoteCount,Proud::RmiContext &rmiContext,const int &consoleType,const int &movieID,const Proud::String &message)
 {
 // 여기서 더이상 main lock을 하지 않음.
     // Proud::CriticalSectionLock __lock(m_core->GetCritSec(),true);
@@ -29,6 +31,8 @@ __msg << message;
 	Proud::RmiID __msgid=(Proud::RmiID)Rmi_ConsoleString;
 	__msg.Write(__msgid); 
 	
+__msg << consoleType;
+__msg << movieID;
 __msg << message;
 
 		return RmiSend(remotes,remoteCount,rmiContext,__msg,

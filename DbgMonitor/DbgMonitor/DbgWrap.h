@@ -12,7 +12,7 @@ namespace dbg
 	extern CDbgMonitorServer *m_pSvr; // reference, 메모리제거는 여기서 함
 	extern CDbgMonitorClient *m_pClt; // reference, 메모리제거는 여기서 함
 
-	void Init( eDbgType type, CDbgMonitorServer *pSvr, CDbgMonitorClient *pClt, const std::string &ip );
+	void Init( eDbgType type, CDbgMonitorServer *pSvr, CDbgMonitorClient *pClt, const std::wstring &ip );
 	void Clear();
 	void FrameMove();	// Only Client
 
@@ -20,7 +20,9 @@ namespace dbg
 	//-------------------------------------------------------------------------
 	// Server Method
 	//-------------------------------------------------------------------------
-	void Trace( TCHAR *msg );
+	void Trace( const TCHAR* pcszFormat, ... );
+	void Trace_Scaleform( int movieID, const TCHAR* pcszFormat, ... );
+	void Trace_Network( const TCHAR* pcszFormat, ... );
 
 
 	//-------------------------------------------------------------------------

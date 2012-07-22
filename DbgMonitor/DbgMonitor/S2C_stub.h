@@ -8,13 +8,13 @@ namespace S2C{
 	class Stub : public Proud::IRmiStub
 	{
 	public:
-virtual bool ConsoleString(Proud::HostID remote,Proud::RmiContext &rmiContext,const Proud::String &message)
+virtual bool ConsoleString(Proud::HostID remote,Proud::RmiContext &rmiContext,const int &consoleType,const int &movieID,const Proud::String &message)
 { 
 			return false;
 		} 
-#define DECRMI_S2C_ConsoleString bool ConsoleString(Proud::HostID remote,Proud::RmiContext &rmiContext,const Proud::String &message)
-#define DEFRMI_S2C_ConsoleString(DerivedClass) bool DerivedClass::ConsoleString(Proud::HostID remote,Proud::RmiContext &rmiContext,const Proud::String &message)
-#define CALL_S2C_ConsoleString ConsoleString(remote,rmiContext,message)
+#define DECRMI_S2C_ConsoleString bool ConsoleString(Proud::HostID remote,Proud::RmiContext &rmiContext,const int &consoleType,const int &movieID,const Proud::String &message)
+#define DEFRMI_S2C_ConsoleString(DerivedClass) bool DerivedClass::ConsoleString(Proud::HostID remote,Proud::RmiContext &rmiContext,const int &consoleType,const int &movieID,const Proud::String &message)
+#define CALL_S2C_ConsoleString ConsoleString(remote,rmiContext,consoleType,movieID,message)
 virtual bool ProcessReceivedMessage(Proud::CReceivedMessage &pa, void* hostTag) OVERRIDE;
  
 // Rmi name 선언

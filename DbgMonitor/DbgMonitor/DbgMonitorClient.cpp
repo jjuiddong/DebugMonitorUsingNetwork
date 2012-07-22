@@ -24,24 +24,31 @@ namespace dbg
 		virtual void OnJoinServerComplete(Proud::ErrorInfo *info,
 			const Proud::ByteArray &replyFromServer) OVERRIDE
 		{
-//			g_isConnectWaiting = false;
 			if (info->m_errorType == Proud::ErrorType_Ok)
 			{
 				if (m_pClient)
-					m_pClient->SetState(CDbgMonitorClient::Connect);
-				//			printf("Succeed to connect server. Allocated hostID=%d\n", g_cli->GetLocalHostID());
+				{
+					m_pClient->SetState(CDbgMonitorClient::State_Connect);
+					m_pClient->Connect();
+				}				
 			}		
  			else
 			{
 				if (m_pClient)
-					m_pClient->SetState(CDbgMonitorClient::Close);
+				{
+					m_pClient->SetState(CDbgMonitorClient::State_Close);
+					m_pClient->DisConnect();
+				}
 			}
 		}
 
 		virtual void OnLeaveServer(Proud::ErrorInfo *errorInfo) OVERRIDE
 		{
 			if (m_pClient)
-				m_pClient->SetState(CDbgMonitorClient::Close);
+			{
+				m_pClient->SetState(CDbgMonitorClient::State_Close);
+				m_pClient->DisConnect();
+			}
 		}
 		virtual void OnP2PMemberJoin(Proud::HostID memberHostID, Proud::HostID groupHostID,
 			int memberCount, const Proud::ByteArray &customField) OVERRIDE
@@ -86,7 +93,7 @@ CDbgMonitorClient::CDbgMonitorClient() :
 	m_pClient(NULL)
 ,	m_pEventSink(NULL)
 ,	m_pProxy(NULL)
-,	m_State(WaitConnect)
+,	m_State(State_WaitConnect)
 {
 
 }
@@ -115,7 +122,6 @@ bool CDbgMonitorClient::Init(const Proud::String &ip)
 	Proud::CNetConnectionParam cp;
 	cp.m_protocolVersion = Proud::Guid(); 
 	//cp.m_serverIP = L"192.168.77.144";	// Address of server
-//	cp.m_serverIP = L"127.0.0.1";	// Address of server
 	cp.m_serverIP = ip;
 	cp.m_serverPort = 33334;	// Port of server
 
@@ -128,7 +134,7 @@ bool CDbgMonitorClient::Init(const Proud::String &ip)
 // Network가 끊기면 false를 리턴한다.
 bool CDbgMonitorClient::FrameMove()
 {
-	if (Close == m_State)
+	if (State_Close == m_State)
 		return false;
 	if (!m_pClient)
 		return false;
@@ -140,5 +146,6 @@ bool CDbgMonitorClient::FrameMove()
 
 void CDbgMonitorClient::Message( int message )
 {
-	m_pProxy->Message( Proud::HostID_Server, Proud::RmiContext::ReliableSend, message );
+	if (m_pProxy)
+		m_pProxy->Message( Proud::HostID_Server, Proud::RmiContext::ReliableSend, message );
 }

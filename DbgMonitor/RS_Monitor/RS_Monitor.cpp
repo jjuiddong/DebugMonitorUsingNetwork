@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "RS_Monitor.h"
 #include "dlg/MainDialog.h"
+#include "dlg/TabConsolWindow.h"
 
 
 class CDbgMonitorClientProc : public dbg::CDbgMonitorClient
@@ -15,14 +16,24 @@ public:
 protected:
 
 public:
+	virtual void Connect() override
+	{
+		if (theApp.m_pDlg)
+			theApp.m_pDlg->SetWindowText(_T("RSMonitor Connected.."));
+	}
+	virtual void DisConnect() override
+	{
+		if (theApp.m_pDlg)
+			theApp.m_pDlg->SetWindowText(_T("DisConnect.."));
+	}
+
 	DECRMI_S2C_ConsoleString
 	{
-		//::MessageBox(NULL, _T("msg"), _T("Recv Message"), MB_OK );
-		// 		g_ClientMessage = msg;
-		// 		InvalidateRect(g_hWnd, NULL, TRUE);
-
-		::AfxMessageBox(_T("recv") );
-
+		if (theApp.m_pDlg)
+		{
+			CTabConsolWindow *pWnd = theApp.m_pDlg->GetConsolWindow();
+			pWnd->AddMessage((CTabConsolWindow::eMsgType)consoleType, movieID, message);
+		}
 		return true;
 	}
 };
@@ -36,21 +47,15 @@ END_MESSAGE_MAP()
 
 // CRS_MonitorApp 생성
 
-CRS_MonitorApp::CRS_MonitorApp()
+CRS_MonitorApp::CRS_MonitorApp():
+	m_pDlg(NULL)
 {
 }
-
-
 CRS_MonitorApp::~CRS_MonitorApp()
 {
 
 }
-
-
-// 유일한 CRS_MonitorApp 개체입니다.
-
 CRS_MonitorApp theApp;
-
 
 // CRS_MonitorApp 초기화
 
@@ -83,8 +88,18 @@ BOOL CRS_MonitorApp::InitInstance()
 	m_pDlg->Create(CMainDialog::IDD);
 	m_pMainWnd = m_pDlg;
 	m_pDlg->ShowWindow(SW_SHOW);
+	m_pDlg->SetWindowText(_T("Wait Connect"));
 
-	dbg::Init(dbg::DbgClient, NULL, new CDbgMonitorClientProc(), "127.0.0.1" );
+	std::wstring ip = _T("127.0.0.1");
+
+	int argCount;
+	LPWSTR *argList = CommandLineToArgvW(GetCommandLine(), &argCount);
+	if (argCount > 1)
+	{
+		ip = argList[ 1];
+	}
+
+	dbg::Init(dbg::DbgClient, NULL, new CDbgMonitorClientProc(), ip );
 
 	while (m_pDlg->IsRunning())
 	{

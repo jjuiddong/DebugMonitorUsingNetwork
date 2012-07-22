@@ -27,7 +27,6 @@ protected:
 public:
 	DECRMI_C2S_Message
 	{
-		//::MessageBox(NULL, _T("msg"), _T("Recv Message"), MB_OK );
 		g_ClientMessage = msg;
 		InvalidateRect(g_hWnd, NULL, TRUE);
 		return true;
@@ -190,7 +189,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    UpdateWindow(hWnd);
 
    // DebugMonitor Server »ý¼º
-   dbg::Init(dbg::DbgServer, new CDbgMonitorProc(), NULL, " ");
+   dbg::Init(dbg::DbgServer, new CDbgMonitorProc(), NULL, _T(""));
 
    return TRUE;
 }
@@ -237,6 +236,22 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			str = to_string<int>(g_ClientMessage, std::dec);
 			TextOut(hdc, 100, 100, str.c_str(), str.length());
 			EndPaint(hWnd, &ps);
+		}
+		break;
+	case WM_KEYDOWN:
+		{
+			switch (wParam)
+			{
+			case VK_END:
+				dbg::Trace( _T("aaaa") );
+				break;
+			case VK_HOME:
+				dbg::Trace_Scaleform( 1, _T("bbbb") );
+				break;
+			case VK_DELETE:
+				dbg::Trace_Network( _T("ccc") );
+				break;
+			}
 		}
 		break;
 	case WM_DESTROY:

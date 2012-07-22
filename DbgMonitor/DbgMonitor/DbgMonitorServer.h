@@ -19,17 +19,19 @@ namespace dbg
 		Proud::CFastArray<Proud::HostID> m_Clients;
 
 	public:
-		bool Init();
-		bool AddClient(Proud::HostID hostId);
-		bool RemoveClient(Proud::HostID hostId);
-		S2C::Proxy* GetProxy() { return m_pProxy; }
+		bool			Init();
+		bool			AddClient(Proud::HostID hostId);
+		bool			RemoveClient(Proud::HostID hostId);
+		virtual void	ClientJoin(Proud::HostID hostId) {}
+		virtual void	ClientLeave(Proud::HostID hostId) {}
+		S2C::Proxy*		GetProxy() { return m_pProxy; }
 
 		//---------------------------------------------------------------
 		// DebugMonitor Method
 		//---------------------------------------------------------------
-		void Trace( TCHAR *msg );
-
-
+		void			Trace( const TCHAR* msg);
+		void			Trace_Scaleform( int movieID, const TCHAR* msg);
+		void			Trace_Network( const TCHAR* msg);
 
 		// Stub
 		DECRMI_C2S_Message override { return true; }

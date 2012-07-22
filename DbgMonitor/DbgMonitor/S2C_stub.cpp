@@ -34,11 +34,17 @@ case Rmi_ConsoleString:
 			ctx.m_relayed=pa.IsRelayed();
 			ctx.m_hostTag = hostTag;
 			
+int consoleType; ___msg >> consoleType;
+int movieID; ___msg >> movieID;
 Proud::String message; ___msg >> message;
 m_core->PostCheckReadMessage(___msg,RmiName_ConsoleString);
 if(m_enableNotifyCallFromStub && !m_internalUse)
 			{
 				Proud::String parameterString;
+Proud::AppendTextOut(parameterString,consoleType);	
+	parameterString += L", ";	
+Proud::AppendTextOut(parameterString,movieID);	
+	parameterString += L", ";	
 Proud::AppendTextOut(parameterString,message);	
 	parameterString += L", ";	
 parameterString = parameterString.Left(parameterString.GetLength() - 2); // 끝의 콤마를 제거한다.
@@ -64,7 +70,7 @@ NotifyCallFromStub((Proud::RmiID)Rmi_ConsoleString, RmiName_ConsoleString,parame
 			}
 			
 			// 본 메서드를 호출한다.
-			bool __ret=ConsoleString (remote,ctx ,message );
+			bool __ret=ConsoleString (remote,ctx ,consoleType,movieID,message );
 			
 			if(__ret==false)
 			{
