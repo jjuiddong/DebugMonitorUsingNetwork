@@ -54,7 +54,7 @@ BEGIN
     "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_KOR)\r\n"
     "LANGUAGE 18, 1\r\n"
     "#pragma code_page(949)\r\n"
-    "#include ""res\\DebugMonitor.rc2""  // Microsoft Visual C++ 이외의 다른 도구에서 편집한 리소스입니다.\r\n"
+    "#include ""res\\MonitorClient.rc2""  // Microsoft Visual C++ 이외의 다른 도구에서 편집한 리소스입니다.\r\n"
     "#include ""l.KOR\\afxres.rc""      // 표준 구성 요소입니다.\r\n"
     "#endif\r\n"
     "\0"
@@ -70,7 +70,7 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_MAINFRAME           ICON                    "res\\DebugMonitor.ico"
+IDR_MAINFRAME           ICON                    "res\\MonitorClient.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -79,22 +79,36 @@ IDR_MAINFRAME           ICON                    "res\\DebugMonitor.ico"
 
 IDD_ABOUTBOX DIALOGEX 0, 0, 170, 62
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "DebugMonitor 정보"
+CAPTION "MonitorClient 정보"
 FONT 9, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,14,14,21,20
-    LTEXT           "DebugMonitor, 버전 1.0",IDC_STATIC,42,14,114,8,SS_NOPREFIX
+    LTEXT           "MonitorClient, 버전 1.0",IDC_STATIC,42,14,114,8,SS_NOPREFIX
     LTEXT           "Copyright (C) 2012",IDC_STATIC,42,26,114,8
     DEFPUSHBUTTON   "확인",IDOK,113,41,50,14,WS_GROUP
 END
 
-IDD_DEBUGMONITOR_DIALOG DIALOGEX 0, 0, 323, 291
+IDD_MONITORCLIENT_DIALOG DIALOGEX 0, 0, 311, 297
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_APPWINDOW
-CAPTION "DebugMonitor"
+CAPTION "MonitorClient"
 FONT 9, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    CONTROL         "",IDC_TAB_MAIN,"SysTabControl32",0x0,7,7,309,277
+    CONTROL         "",IDC_TAB_MAIN,"SysTabControl32",0x0,7,7,297,283
+END
+
+IDD_DLG_CONSOL DIALOGEX 0, 0, 316, 342
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Clear",IDC_BUTTON_CLEAR,0,0,50,14
+    PUSHBUTTON      "Filter",IDC_BUTTON_FILTER,203,0,50,14
+    COMBOBOX        IDC_COMBO_MSGTYPE,53,0,48,53,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "NoUpate",IDC_CHECK_NOUPDATE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,255,1,44,10
+    CONTROL         "NoScroll",IDC_CHECK_NOSCROLL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,255,11,41,10
+    LISTBOX         IDC_LIST_MSG,0,24,314,318,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP,WS_EX_DLGMODALFRAME | WS_EX_CLIENTEDGE
+    LISTBOX         IDC_LIST_MSG2,0,24,314,318,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP,WS_EX_DLGMODALFRAME | WS_EX_CLIENTEDGE
+    LISTBOX         IDC_LIST_MSG3,0,24,314,318,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP,WS_EX_DLGMODALFRAME | WS_EX_CLIENTEDGE
 END
 
 
@@ -123,9 +137,9 @@ BEGIN
             VALUE "CompanyName", "TODO: <회사 이름>"
             VALUE "FileDescription", "TODO: <파일 설명>"
             VALUE "FileVersion", "1.0.0.1"
-            VALUE "InternalName", "DebugMonitor.exe"
+            VALUE "InternalName", "MonitorClient.exe"
             VALUE "LegalCopyright", "TODO: (c) <회사 이름>.  All rights reserved."
-            VALUE "OriginalFilename", "DebugMonitor.exe"
+            VALUE "OriginalFilename", "MonitorClient.exe"
             VALUE "ProductName", "TODO: <제품 이름>"
             VALUE "ProductVersion", "1.0.0.1"
         END
@@ -153,12 +167,17 @@ BEGIN
         BOTTOMMARGIN, 55
     END
 
-    IDD_DEBUGMONITOR_DIALOG, DIALOG
+    IDD_MONITORCLIENT_DIALOG, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 316
+        RIGHTMARGIN, 304
         TOPMARGIN, 7
-        BOTTOMMARGIN, 284
+        BOTTOMMARGIN, 290
+    END
+
+    IDD_DLG_CONSOL, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 183
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -171,7 +190,7 @@ END
 
 STRINGTABLE 
 BEGIN
-    IDS_ABOUTBOX            "DebugMonitor 정보(&A)..."
+    IDS_ABOUTBOX            "MonitorClient 정보(&A)..."
 END
 
 #endif    // 한국어 resources
@@ -192,7 +211,7 @@ END
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_KOR)
 LANGUAGE 18, 1
 #pragma code_page(949)
-#include "res\DebugMonitor.rc2"  // Microsoft Visual C++ 이외의 다른 도구에서 편집한 리소스입니다.
+#include "res\MonitorClient.rc2"  // Microsoft Visual C++ 이외의 다른 도구에서 편집한 리소스입니다.
 #include "l.KOR\afxres.rc"      // 표준 구성 요소입니다.
 #endif
 
