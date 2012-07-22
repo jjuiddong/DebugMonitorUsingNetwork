@@ -4,6 +4,9 @@
 #include "ProudNet.h"
 #include "C2S_stub.h"
 #include "S2C_proxy.h"
+#include "C2S_proxy.h"
+#include "S2C_stub.h"
+
 
 #ifdef _DEBUG
 #pragma comment(lib, "ProudNet_2008_Debug.lib" )

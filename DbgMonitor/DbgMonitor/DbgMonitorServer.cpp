@@ -63,6 +63,8 @@ namespace dbg
 
 CDbgMonitorServer::CDbgMonitorServer():
 	m_pNetServer(NULL)
+,	m_pEventSink(NULL)
+,	m_pProxy(NULL)
 {
 
 }
