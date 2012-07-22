@@ -99,7 +99,7 @@ BOOL CRS_MonitorApp::InitInstance()
 		ip = argList[ 1];
 	}
 
-	dbg::Init(dbg::DbgClient, NULL, new CDbgMonitorClientProc(), ip );
+	dbg::Init(m_pDlg->m_hWnd, dbg::DbgClient, NULL, new CDbgMonitorClientProc(), ip );
 
 	while (m_pDlg->IsRunning())
 	{

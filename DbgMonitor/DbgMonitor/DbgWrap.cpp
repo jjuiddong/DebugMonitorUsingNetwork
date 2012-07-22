@@ -14,7 +14,7 @@ namespace dbg
 
 
 // Client로 동작할때만 ip값이 필요하다.
-void dbg::Init( eDbgType type, CDbgMonitorServer *pSvr, CDbgMonitorClient *pClt, const std::wstring &ip )
+void dbg::Init( HWND hWnd, eDbgType type, CDbgMonitorServer *pSvr, CDbgMonitorClient *pClt, const std::wstring &ip )
 {
 	m_Type = type;
 	m_pSvr = pSvr;
@@ -22,13 +22,21 @@ void dbg::Init( eDbgType type, CDbgMonitorServer *pSvr, CDbgMonitorClient *pClt,
 	if (DbgServer == m_Type)
 	{
 		if (m_pSvr)
+		{
 			m_pSvr->Init();
+			ShellExecute(NULL, _T("open"), _T("RS_Monitor.exe"), ip.c_str(), NULL, SW_SHOW);
+		}
 	}
 	else
 	{
  		if (m_pClt)
 			m_pClt->Init( ip.c_str());
 	}
+}
+
+bool dbg::IsEnable() 
+{ 
+	return (m_pClt) || (m_pSvr);
 }
 
 void dbg::Clear()
@@ -81,3 +89,21 @@ void dbg::Trace_Network( const TCHAR* pcszFormat, ... )
 		m_pSvr->Trace_Network(buffer);
 	}
 }
+
+
+void dbg::SetTitleName(const TCHAR *titleName)
+{
+}
+
+float dbg::GetValue(int idx) 
+{ 
+	return 0;
+}
+void dbg::SetValue(int idx, float v) 
+{
+}
+//	void SetUITree(ui::CUINode *pNode) {}
+void dbg::SetMouseOverUI(int movieID) 
+{
+}
+

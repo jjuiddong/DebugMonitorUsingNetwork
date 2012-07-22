@@ -6,6 +6,8 @@
 #include  <string>
 #include <iostream>
 #include <sstream>
+#include <shellapi.h>
+
 
 #define MAX_LOADSTRING 100
 
@@ -15,6 +17,14 @@ TCHAR szTitle[MAX_LOADSTRING];					// 제목 표시줄 텍스트입니다.
 TCHAR szWindowClass[MAX_LOADSTRING];			// 기본 창 클래스 이름입니다.
 int g_ClientMessage = 1;
 HWND g_hWnd;
+
+
+#ifdef _DEBUG
+	#	pragma comment(lib, "../Debug/DbgMonitor_Debug_Win32.lib" )
+#else
+	#	pragma comment(lib, "../Release/DbgMonitor_Release_Win32.lib" )
+#endif
+
 
 class CDbgMonitorProc : public dbg::CDbgMonitorServer
 {
@@ -189,7 +199,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    UpdateWindow(hWnd);
 
    // DebugMonitor Server 생성
-   dbg::Init(dbg::DbgServer, new CDbgMonitorProc(), NULL, _T(""));
+   dbg::Init(hWnd, dbg::DbgServer, new CDbgMonitorProc(), NULL, _T(""));
 
    return TRUE;
 }
