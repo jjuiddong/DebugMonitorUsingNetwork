@@ -3,6 +3,9 @@
 
 #include "stdafx.h"
 #include "GameClient.h"
+#include  <string>
+#include <iostream>
+#include <sstream>
 
 #define MAX_LOADSTRING 100
 
@@ -10,7 +13,8 @@
 HINSTANCE hInst;								// 현재 인스턴스입니다.
 TCHAR szTitle[MAX_LOADSTRING];					// 제목 표시줄 텍스트입니다.
 TCHAR szWindowClass[MAX_LOADSTRING];			// 기본 창 클래스 이름입니다.
-
+int g_ClientMessage = 1;
+HWND g_hWnd;
 
 class CDbgMonitorProc : public dbg::CDbgMonitorServer
 {
@@ -23,10 +27,58 @@ protected:
 public:
 	DECRMI_C2S_Message
 	{
-		::MessageBox(NULL, _T("msg"), _T("Recv Message"), MB_OK );
+		//::MessageBox(NULL, _T("msg"), _T("Recv Message"), MB_OK );
+		g_ClientMessage = msg;
+		InvalidateRect(g_hWnd, NULL, TRUE);
 		return true;
 	}
 };
+
+
+std::wstring format(const wchar_t *fmt, ...) 
+{ 
+	using std::wstring;
+	using std::vector;
+
+	wstring retStr(_T(""));
+
+	if (NULL != fmt)
+	{
+		va_list marker = NULL; 
+
+		// initialize variable arguments
+		va_start(marker, fmt); 
+
+		// Get formatted string length adding one for NULL
+		size_t len = _vscwprintf(fmt, marker) + 1;
+
+		// Create a char vector to hold the formatted string.
+		vector<wchar_t> buffer(len, '\0');
+		int nWritten = _vsnwprintf_s(&buffer[0], buffer.size(), len, fmt, marker);    
+
+		if (nWritten > 0)
+		{
+			retStr = &buffer[0];
+		}
+
+		// Reset variable arguments
+		va_end(marker); 
+	}
+
+	return retStr; 
+}
+
+
+template <class T>
+std::wstring to_string(T t, std::ios_base & (*f)(std::ios_base&))
+{
+	std::wostringstream oss;
+	oss << f << t;
+	return oss.str();
+}
+
+
+
 
 
 // 이 코드 모듈에 들어 있는 함수의 정방향 선언입니다.
@@ -127,6 +179,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    hWnd = CreateWindow(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, NULL, NULL, hInstance, NULL);
+   g_hWnd = hWnd;
 
    if (!hWnd)
    {
@@ -177,9 +230,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		}
 		break;
 	case WM_PAINT:
-		hdc = BeginPaint(hWnd, &ps);
-		// TODO: 여기에 그리기 코드를 추가합니다.
-		EndPaint(hWnd, &ps);
+		{
+			hdc = BeginPaint(hWnd, &ps);
+			// TODO: 여기에 그리기 코드를 추가합니다.
+			std::wstring str;
+			str = to_string<int>(g_ClientMessage, std::dec);
+			TextOut(hdc, 100, 100, str.c_str(), str.length());
+			EndPaint(hWnd, &ps);
+		}
 		break;
 	case WM_DESTROY:
 		dbg::Clear();
