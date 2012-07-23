@@ -43,6 +43,7 @@ public:
 	}
 };
 
+CDbgMonitorProc *g_pDbgMonitorProc = NULL;
 
 std::wstring format(const wchar_t *fmt, ...) 
 { 
@@ -131,6 +132,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 		}
 	}
 
+	delete g_pDbgMonitorProc;
 	return (int) msg.wParam;
 }
 
@@ -199,7 +201,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    UpdateWindow(hWnd);
 
    // DebugMonitor Server »ý¼º
-   dbg::Init(hWnd, dbg::DbgServer, new CDbgMonitorProc(), NULL, _T(""));
+   g_pDbgMonitorProc = new CDbgMonitorProc();
+   dbg::Init(hWnd, dbg::DbgServer, g_pDbgMonitorProc, NULL, _T(""));
 
    return TRUE;
 }

@@ -7,8 +7,8 @@ using namespace dbg;
 namespace dbg
 {
 	eDbgType m_Type = DbgClient;
-	CDbgMonitorServer *m_pSvr = NULL; // reference, 메모리제거는 여기서 함
-	CDbgMonitorClient *m_pClt = NULL; // reference, 메모리제거는 여기서 함
+	CDbgMonitorServer *m_pSvr = NULL;
+	CDbgMonitorClient *m_pClt = NULL;
 
 };
 
@@ -41,10 +41,6 @@ bool dbg::IsEnable()
 
 void dbg::Clear()
 {
-	if (m_pSvr) delete m_pSvr;
-	m_pSvr = NULL;
-	if (m_pClt) delete m_pClt;
-	m_pClt = NULL;
 }
 
 

@@ -9,8 +9,8 @@
 namespace dbg
 {
 	extern eDbgType m_Type;
-	extern CDbgMonitorServer *m_pSvr; // reference, 메모리제거는 여기서 함
-	extern CDbgMonitorClient *m_pClt; // reference, 메모리제거는 여기서 함
+	extern CDbgMonitorServer *m_pSvr;
+	extern CDbgMonitorClient *m_pClt;
 
 	void Init( HWND hWnd, eDbgType type, CDbgMonitorServer *pSvr, CDbgMonitorClient *pClt, const std::wstring &ip );
 	void Clear();
