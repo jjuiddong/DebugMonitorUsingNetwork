@@ -86,6 +86,19 @@ void dbg::Trace_Network( const TCHAR* pcszFormat, ... )
 	}
 }
 
+void dbg::Message( int msgType, int subType, const TCHAR* pcszFormat, ... )
+{
+	VA_MAKE_M(buffer, pcszFormat);
+	if (m_pSvr)
+	{
+		m_pSvr->Message(msgType, subType, buffer);
+	}
+	if (m_pClt)
+	{
+		m_pClt->Message(msgType, subType, buffer);
+	}
+}
+
 
 void dbg::SetTitleName(const TCHAR *titleName)
 {

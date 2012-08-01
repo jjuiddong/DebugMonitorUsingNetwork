@@ -5,6 +5,9 @@
 #include "RS_Monitor.h"
 #include "dlg/MainDialog.h"
 #include "dlg/TabConsolWindow.h"
+#include "dlg/TabUIViewer.h"
+#include "tinyXml/tinyxml.h"
+
 
 
 class CDbgMonitorClientProc : public dbg::CDbgMonitorClient
@@ -27,6 +30,43 @@ public:
 			theApp.m_pDlg->SetWindowText(_T("DisConnect.."));
 	}
 
+	DECRMI_S2C_SendMessage
+	{
+		if (theApp.m_pDlg)
+		{
+// 			CTabConsolWindow *pWnd = theApp.m_pDlg->GetConsolWindow();
+// 			pWnd->AddMessage((CTabConsolWindow::eMsgType)consoleType, movieID, message);
+			if (msgType == 0)
+			{
+				HWND hwnd = FindWindow(msg.GetString(), msg.GetString());
+				if (!hwnd) return true;
+
+				RECT rect;
+				GetWindowRect(hwnd, &rect);
+
+				RECT cr;
+				GetWindowRect(theApp.m_pDlg->m_hWnd, &cr);
+				const int w = cr.right - cr.left;
+				const int h = cr.bottom - cr.top;
+				MoveWindow(theApp.m_pDlg->m_hWnd, rect.right, rect.top, w, h, TRUE);		
+			}
+			else if (msgType == 2)
+			{
+				std::wstring wstr = msg.GetString();
+				std::string str;
+				str.assign(wstr.begin(), wstr.end());
+
+				TiXmlDocument doc;
+				doc.Parse(str.c_str());
+
+				CTabUIViewer *pWnd = theApp.m_pDlg->GetUIViewr();
+				pWnd->SetUITree(&doc);				
+			}
+
+		}
+		return true;
+	}
+
 	DECRMI_S2C_ConsoleString
 	{
 		if (theApp.m_pDlg)
@@ -36,6 +76,7 @@ public:
 		}
 		return true;
 	}
+
 };
 
 

@@ -9,6 +9,8 @@ namespace C2S{
 		Rmi_First = (1000),
 Rmi_Message = (1000 + 1),
 
+Rmi_SendMessage = (1000 + 2),
+
     Rmi_Last
 	};
 

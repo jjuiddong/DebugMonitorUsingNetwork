@@ -41,8 +41,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;F:\Program Files (x86)\Nettention\ProudNet\include&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
+				AdditionalIncludeDirectories="C:\RS_Project2\lib\ProudNet\include"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;TIXML_USE_STL"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -62,7 +62,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;F:\Program Files (x86)\Nettention\ProudNet\lib\win32&quot;"
+				AdditionalLibraryDirectories="C:\RS_Project2\lib\ProudNet\lib\win32"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -116,8 +116,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;F:\Program Files (x86)\Nettention\ProudNet\include&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
+				AdditionalIncludeDirectories="C:\RS_Project2\lib\ProudNet\include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;TIXML_USE_STL"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="2"
@@ -136,7 +136,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;F:\Program Files (x86)\Nettention\ProudNet\lib\win32&quot;"
+				AdditionalLibraryDirectories="C:\RS_Project2\lib\ProudNet\lib\win32"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -236,6 +236,34 @@
 			</File>
 			<File
 				RelativePath=".\small.ico"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="tinyXml"
+			>
+			<File
+				RelativePath=".\tinyXml\tinystr.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\tinyXml\tinystr.h"
+				>
+			</File>
+			<File
+				RelativePath=".\tinyXml\tinyxml.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\tinyXml\tinyxml.h"
+				>
+			</File>
+			<File
+				RelativePath=".\tinyXml\tinyxmlerror.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\tinyXml\tinyxmlparser.cpp"
 				>
 			</File>
 		</Filter>

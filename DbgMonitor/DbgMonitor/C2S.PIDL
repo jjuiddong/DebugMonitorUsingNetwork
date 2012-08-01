@@ -6,5 +6,6 @@ global C2S 1000 // client-to-server RMI, First message ID = 1000
 //	Chat([in] CStringW a,[in] int b,[in] float c, [in] MyClass d, [in] CFastArray<int> f, [in] CFastMap<int,float> g, [in] ByteArray block);
 
 	Message( [in] int msg );
+	SendMessage( [in] int msgType, [in] int subType, [in] Proud::String msg );
 
 }

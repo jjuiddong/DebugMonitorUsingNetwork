@@ -1,6 +1,10 @@
+
 global S2C 2000 // server-to-client RMI, Fist message ID = 2000
 {
 
-	ConsoleString( [in] int consoleType, [in] int movieID, [in] Proud::String message );
+	SendMessage( [in] int msgType, [in] int subType, [in] Proud::String msg );
+	
+	ConsoleString( [in] int consoleType, [in] int movieID, [in] Proud::String message );	
+
 
 }

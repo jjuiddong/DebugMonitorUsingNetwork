@@ -32,6 +32,7 @@ namespace dbg
 		void			Trace( const TCHAR* msg);
 		void			Trace_Scaleform( int movieID, const TCHAR* msg);
 		void			Trace_Network( const TCHAR* msg);
+		void			Message( int msgType, int subType, const TCHAR *msg );
 
 		// Stub
 		DECRMI_C2S_Message override { return true; }

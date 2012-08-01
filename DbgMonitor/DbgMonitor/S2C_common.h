@@ -7,7 +7,9 @@ namespace S2C{
 	enum RmiID
 	{   
 		Rmi_First = (2000),
-Rmi_ConsoleString = (2000 + 1),
+Rmi_SendMessage = (2000 + 1),
+
+Rmi_ConsoleString = (2000 + 2),
 
     Rmi_Last
 	};

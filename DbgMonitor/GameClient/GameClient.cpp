@@ -7,6 +7,12 @@
 #include <iostream>
 #include <sstream>
 #include <shellapi.h>
+#include <atlconv.h>
+
+using namespace std;
+#include <string>
+#include "tinyXml/tinyxml.h"
+
 
 
 #define MAX_LOADSTRING 100
@@ -35,6 +41,12 @@ public:
 protected:
 
 public:
+	virtual void ClientJoin(Proud::HostID hostId) override
+	{
+		m_pProxy->SendMessage(hostId,  Proud::RmiContext::ReliableSend, 0, 0, _T("GameClient"));
+
+	}
+
 	DECRMI_C2S_Message
 	{
 		g_ClientMessage = msg;
@@ -95,7 +107,6 @@ std::wstring to_string(T t, std::ios_base & (*f)(std::ios_base&))
 ATOM				MyRegisterClass(HINSTANCE hInstance);
 BOOL				InitInstance(HINSTANCE, int);
 LRESULT CALLBACK	WndProc(HWND, UINT, WPARAM, LPARAM);
-INT_PTR CALLBACK	About(HWND, UINT, WPARAM, LPARAM);
 
 int APIENTRY _tWinMain(HINSTANCE hInstance,
                      HINSTANCE hPrevInstance,
@@ -232,7 +243,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		switch (wmId)
 		{
 		case IDM_ABOUT:
-			DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+//			DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
 			break;
 		case IDM_EXIT:
 			DestroyWindow(hWnd);
@@ -264,6 +275,30 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			case VK_DELETE:
 				dbg::Trace_Network( _T("ccc") );
 				break;
+
+			case VK_RETURN:
+				{
+					TiXmlDocument doc;
+					TiXmlDeclaration * decl = new TiXmlDeclaration( "1.0", "", "" );
+					TiXmlElement * element = new TiXmlElement( "Hello" );
+					element->LinkEndChild(new TiXmlText( "World" ));
+					TiXmlElement * element2 = new TiXmlElement( "Youarea" );
+					element2->LinkEndChild(new TiXmlText( "Girl" ));
+					TiXmlElement * element3 = new TiXmlElement( "Iama" );
+					element3->LinkEndChild(new TiXmlText( "Boy" ));
+					element2->LinkEndChild(element3);
+
+					doc.LinkEndChild( decl );
+					doc.LinkEndChild( element );
+					doc.LinkEndChild( element2 );
+
+					std::string str;
+					str << doc;
+					std::wstring wstr;
+					wstr.assign(str.begin(), str.end());
+					dbg::Message( 1, 0, wstr.c_str() );
+				}
+				break;
 			}
 		}
 		break;
@@ -275,24 +310,4 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		return DefWindowProc(hWnd, message, wParam, lParam);
 	}
 	return 0;
-}
-
-// 정보 대화 상자의 메시지 처리기입니다.
-INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
-{
-	UNREFERENCED_PARAMETER(lParam);
-	switch (message)
-	{
-	case WM_INITDIALOG:
-		return (INT_PTR)TRUE;
-
-	case WM_COMMAND:
-		if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
-		{
-			EndDialog(hDlg, LOWORD(wParam));
-			return (INT_PTR)TRUE;
-		}
-		break;
-	}
-	return (INT_PTR)FALSE;
 }

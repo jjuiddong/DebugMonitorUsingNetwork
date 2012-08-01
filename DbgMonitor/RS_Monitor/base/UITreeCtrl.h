@@ -5,6 +5,8 @@
 #include "TreeCtrlBase.h"
 #include <list>
 
+class TiXmlDocument;
+class TiXmlElement;
 class CUITreeCtrl : public CTreeCtrlBase
 {
 public:
@@ -19,12 +21,14 @@ protected:
 
 public:
 //	void	SetUITree(ui::CUINode *pRoot);
+	void			SetUITree(TiXmlDocument *pDoc);
 	std::list<int>	GetCheckIDList();
 	void			CheckAllTree( BOOL isCheck );
 	HTREEITEM		SelectUI( int movieID );
 
 protected:
 //	HTREEITEM		AddUITree(HTREEITEM hItem, ui::CUINode *pTree);
+	HTREEITEM		AddUITree(HTREEITEM hParentItem, TiXmlElement *pElement);
 	void			CheckUITree( HTREEITEM hItem, BOOL isCheck );	
 	void			GetCheckIDList(HTREEITEM hItem, std::list<int> &lst);
 	void			GetUITree(HTREEITEM hItem, TreeItemList &lst);

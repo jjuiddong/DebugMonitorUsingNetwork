@@ -42,7 +42,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/Ylsymbol "
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;F:\Program Files (x86)\Nettention\ProudNet\include&quot;"
+				AdditionalIncludeDirectories="C:\RS_Project2\lib\ProudNet\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
@@ -63,7 +63,7 @@
 			<Tool
 				Name="VCLibrarianTool"
 				OutputFile="$(OutDir)\$(ProjectName)_$(ConfigurationName)_$(PlatformName).lib"
-				AdditionalLibraryDirectories="&quot;F:\Program Files (x86)\Nettention\ProudNet\lib\win32&quot;"
+				AdditionalLibraryDirectories="C:\RS_Project2\lib\ProudNet\lib\win32"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -108,7 +108,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;F:\Program Files (x86)\Nettention\ProudNet\include&quot;"
+				AdditionalIncludeDirectories="C:\RS_Project2\lib\ProudNet\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				MinimalRebuild="false"
 				RuntimeLibrary="0"
@@ -129,7 +129,7 @@
 			<Tool
 				Name="VCLibrarianTool"
 				OutputFile="$(OutDir)\$(ProjectName)_$(ConfigurationName)_$(PlatformName).lib"
-				AdditionalLibraryDirectories="&quot;F:\Program Files (x86)\Nettention\ProudNet\lib\win32&quot;"
+				AdditionalLibraryDirectories="C:\RS_Project2\lib\ProudNet\lib\win32"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -213,8 +213,19 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="$(InputName).PIDL 컴파일..."
-						CommandLine="&quot;F:\Program Files (x86)\Nettention\ProudNet\util\PIDL.exe&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
-						AdditionalDependencies="&quot;F:\Program Files (x86)\Nettention\ProudNet\util\PIDL.exe&quot;"
+						CommandLine="&quot;C:\RS_Project2\lib\ProudNet\util\PIDL.exe&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						AdditionalDependencies="&quot;C:\RS_Project2\lib\ProudNet\util\PIDL.exe&quot;"
+						Outputs="$(InputDir)\$(InputName)_common.h;$(InputDir)\$(InputName)_proxy.cpp;$(InputDir)\$(InputName)_proxy.h;$(InputDir)\$(InputName)_stub.cpp;$(InputDir)\$(InputName)_stub.h"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="$(InputName).PIDL 컴파일..."
+						CommandLine="&quot;C:\RS_Project2\lib\ProudNet\util\PIDL.exe&quot; &quot;$(InputPath)&quot;"
+						AdditionalDependencies="&quot;C:\RS_Project2\lib\ProudNet\util\PIDL.exe&quot;"
 						Outputs="$(InputDir)\$(InputName)_common.h;$(InputDir)\$(InputName)_proxy.cpp;$(InputDir)\$(InputName)_proxy.h;$(InputDir)\$(InputName)_stub.cpp;$(InputDir)\$(InputName)_stub.h"
 					/>
 				</FileConfiguration>
@@ -228,8 +239,19 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="$(InputName).PIDL 컴파일..."
-						CommandLine="&quot;F:\Program Files (x86)\Nettention\ProudNet\util\PIDL.exe&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
-						AdditionalDependencies="&quot;F:\Program Files (x86)\Nettention\ProudNet\util\PIDL.exe&quot;"
+						CommandLine="&quot;C:\RS_Project2\lib\ProudNet\util\PIDL.exe&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						AdditionalDependencies="&quot;C:\RS_Project2\lib\ProudNet\util\PIDL.exe&quot;"
+						Outputs="$(InputDir)\$(InputName)_common.h;$(InputDir)\$(InputName)_proxy.cpp;$(InputDir)\$(InputName)_proxy.h;$(InputDir)\$(InputName)_stub.cpp;$(InputDir)\$(InputName)_stub.h"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="$(InputName).PIDL 컴파일..."
+						CommandLine="&quot;C:\RS_Project2\lib\ProudNet\util\PIDL.exe&quot; &quot;$(InputPath)&quot;"
+						AdditionalDependencies="&quot;C:\RS_Project2\lib\ProudNet\util\PIDL.exe&quot;"
 						Outputs="$(InputDir)\$(InputName)_common.h;$(InputDir)\$(InputName)_proxy.cpp;$(InputDir)\$(InputName)_proxy.h;$(InputDir)\$(InputName)_stub.cpp;$(InputDir)\$(InputName)_stub.h"
 					/>
 				</FileConfiguration>

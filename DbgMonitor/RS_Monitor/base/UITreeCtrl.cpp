@@ -4,7 +4,9 @@
 #include "stdafx.h"
 #include "../RS_Monitor.h"
 #include "UITreeCtrl.h"
+#include "../tinyXml/tinyxml.h"
 
+using namespace std;
 
 // CUITreeCtrl
 CUITreeCtrl::CUITreeCtrl(TYPE type, BOOL isDisplayDetail)
@@ -28,6 +30,92 @@ END_MESSAGE_MAP()
 
 // CUITreeCtrl 메시지 처리기입니다.
 
+
+void CUITreeCtrl::SetUITree(TiXmlDocument *pDoc)
+{
+	if (!pDoc)
+		return;
+
+	DeleteAllItems();
+	HTREEITEM hRoot = InsertTree(NULL, _T("UITree"), NULL);
+	TiXmlElement *pRoot = pDoc->RootElement();
+	AddUITree(hRoot, pRoot);
+}
+
+HTREEITEM CUITreeCtrl::AddUITree(HTREEITEM hParentItem, TiXmlElement *pElement)
+{
+	if (!pElement)
+		return NULL;
+
+	string value = pElement->Value();
+	const char *ctext = pElement->GetText();
+	string text = (ctext)? ctext: " ";
+	if (ctext)
+	{
+		value += " : ";
+		value += text;
+	}
+
+	wstring wtext;
+	wtext.assign(value.begin(), value.end());
+	HTREEITEM hItem = InsertTree(hParentItem, wtext.c_str(), NULL);
+
+	TiXmlAttribute *attr = pElement->FirstAttribute();
+	while (attr)
+	{
+		string name = attr->Name();
+		name += " : ";
+		name += attr->Value();
+		wstring wname;
+		wname.assign(name.begin(), name.end());
+		HTREEITEM hSubItem = InsertTree(hItem, wname.c_str(), NULL);
+
+		attr = attr->Next();
+		SelectItem(hSubItem);
+	}
+
+	SelectItem(hItem);
+
+	TiXmlElement *pChild = pElement->FirstChildElement();
+	AddUITree(hItem, pChild);
+	AddUITree(hParentItem, pElement->NextSiblingElement());
+
+/*
+	if (m_isDisplayDetail)
+	{
+		//---------------------------------------------------------------------------------
+		// UINode 정보출력
+		CString strFilename;
+		strFilename.Format(_T("- fileName = %s"), pNode->GetResourceName().c_str());
+		InsertTree(hItem, strFilename, (CDialog*)pNode);
+
+		CString strVisible;
+		strVisible.Format(_T("- IsVisible = %d"), pNode->IsVisible() );
+		HTREEITEM hSubItem = InsertTree(hItem, strVisible, (CDialog*)pNode);
+
+		CString strLook;
+		strLook.Format(_T("- IsLook = %d"), pNode->IsLook() );
+		InsertTree(hItem, strLook, (CDialog*)pNode);
+		//---------------------------------------------------------------------------------
+
+		SelectItem(hSubItem);
+	}
+	else
+	{
+		SelectItem(hItem);
+	}
+
+	ui::NodeList *pList = pNode->GetChildList();
+	if (pList)
+	{
+		ui::NodeItor it = pList->begin();
+		while (pList->end() != it)
+			AddUITree(hItem, *it++);
+	}
+	return hItem;	
+/**/
+	return hItem;
+}
 
 
 //------------------------------------------------------------------------------

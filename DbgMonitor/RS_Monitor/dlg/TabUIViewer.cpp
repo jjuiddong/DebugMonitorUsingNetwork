@@ -6,6 +6,8 @@
 #include "TabUIViewer.h"
 #include "MainDialog.h"
 
+#include "../tinyXml/tinyxml.h"
+
 
 // CDlgUIViwer 대화 상자입니다.
 
@@ -52,6 +54,7 @@ END_MESSAGE_MAP()
 void CTabUIViewer::OnBnClickedButtonUpdate()
 {
 	//CMainDialog::SendDbgMessage(dbg::REFRESH_UITREE, 0, 0);
+	dbg::Message(1);
 
 }
 
@@ -99,4 +102,10 @@ void CTabUIViewer::SetMouseOverUI(int movieID)
 // 	}
 // 
 	UpdateData(FALSE);
+}
+
+
+void CTabUIViewer::SetUITree(TiXmlDocument *pDoc)
+{
+	m_UITree.SetUITree(pDoc);
 }

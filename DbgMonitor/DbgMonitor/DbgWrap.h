@@ -12,7 +12,7 @@ namespace dbg
 	extern CDbgMonitorServer *m_pSvr;
 	extern CDbgMonitorClient *m_pClt;
 
-	void Init( HWND hWnd, eDbgType type, CDbgMonitorServer *pSvr, CDbgMonitorClient *pClt, const std::wstring &ip );
+	void Init( HWND hWnd, eDbgType type, CDbgMonitorServer *pSvr, CDbgMonitorClient *pClt, const std::wstring &ip);
 	void Clear();
 	void FrameMove();	// Only Client
 	bool IsEnable();
@@ -34,10 +34,15 @@ namespace dbg
 	void Trace_Scaleform( int movieID, const TCHAR* pcszFormat, ... );
 	void Trace_Network( const TCHAR* pcszFormat, ... );
 
-
 	//-------------------------------------------------------------------------
 	// Client Method
 	//-------------------------------------------------------------------------
 	void Message( int msg );
+
+	//-------------------------------------------------------------------------
+	// Common Method
+	//-------------------------------------------------------------------------
+	void Message( int msgType, int subType, const TCHAR* pcszFormat, ... );
+
 
 };

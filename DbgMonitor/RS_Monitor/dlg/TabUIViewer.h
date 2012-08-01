@@ -5,6 +5,7 @@
 #include "../base/UITreeCtrl.h"
 
 
+class TiXmlDocument;
 class CTabUIViewer : public CDlgBase
 {
 public:
@@ -18,6 +19,7 @@ protected:
 public:
 //	void SetUITree(ui::CUINode *pRoot);
 	void SetMouseOverUI(int movieID);
+	void SetUITree(TiXmlDocument *pDoc);
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.

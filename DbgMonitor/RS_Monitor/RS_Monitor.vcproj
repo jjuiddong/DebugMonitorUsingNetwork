@@ -5,10 +5,6 @@
 	Name="RS_Monitor"
 	ProjectGUID="{F7A716B9-96F3-430F-B745-7282C9760094}"
 	RootNamespace="RS_Monitor"
-	SccProjectName="SAK"
-	SccAuxPath="SAK"
-	SccLocalPath="SAK"
-	SccProvider="SAK"
 	Keyword="MFCDLLProj"
 	TargetFrameworkVersion="196613"
 	>
@@ -49,8 +45,8 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;F:\Program Files (x86)\Nettention\ProudNet\include&quot;"
-				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;"
+				AdditionalIncludeDirectories="C:\RS_Project2\lib\ProudNet\include"
+				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;TIXML_USE_STL;"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -74,7 +70,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
-				AdditionalLibraryDirectories="&quot;F:\Program Files (x86)\Nettention\ProudNet\lib\win32&quot;"
+				AdditionalLibraryDirectories="C:\RS_Project2\lib\ProudNet\lib\win32"
 				GenerateDebugInformation="true"
 			/>
 			<Tool
@@ -131,8 +127,8 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;F:\Program Files (x86)\Nettention\ProudNet\include&quot;"
-				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;"
+				AdditionalIncludeDirectories="C:\RS_Project2\lib\ProudNet\include"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;TIXML_USE_STL"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="2"
@@ -154,7 +150,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
-				AdditionalLibraryDirectories="&quot;F:\Program Files (x86)\Nettention\ProudNet\lib\win32&quot;"
+				AdditionalLibraryDirectories="C:\RS_Project2\lib\ProudNet\lib\win32"
 				ProgramDatabaseFile="$(TargetDir)$(TargetName).pdb"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -215,7 +211,7 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;F:\Program Files (x86)\Nettention\ProudNet\include&quot;"
+				AdditionalIncludeDirectories="C:\RS_Project2\lib\ProudNet\include"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_SHIPPING"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
@@ -237,6 +233,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalLibraryDirectories="C:\RS_Project2\lib\ProudNet\lib\win32"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -459,6 +456,34 @@
 			</File>
 			<File
 				RelativePath=".\base\UITreeCtrl.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="tinyXml"
+			>
+			<File
+				RelativePath=".\tinyXml\tinystr.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\tinyXml\tinystr.h"
+				>
+			</File>
+			<File
+				RelativePath=".\tinyXml\tinyxml.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\tinyXml\tinyxml.h"
+				>
+			</File>
+			<File
+				RelativePath=".\tinyXml\tinyxmlerror.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\tinyXml\tinyxmlparser.cpp"
 				>
 			</File>
 		</Filter>

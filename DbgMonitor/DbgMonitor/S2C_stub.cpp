@@ -27,6 +27,69 @@ namespace S2C{
 					
 		switch(__rmiID)
 		{
+case Rmi_SendMessage:
+		{
+			Proud::RmiContext ctx;
+			ctx.m_sentFrom=pa.GetRemoteHostID();
+			ctx.m_relayed=pa.IsRelayed();
+			ctx.m_hostTag = hostTag;
+			
+int msgType; ___msg >> msgType;
+int subType; ___msg >> subType;
+Proud::String msg; ___msg >> msg;
+m_core->PostCheckReadMessage(___msg,RmiName_SendMessage);
+if(m_enableNotifyCallFromStub && !m_internalUse)
+			{
+				Proud::String parameterString;
+Proud::AppendTextOut(parameterString,msgType);	
+	parameterString += L", ";	
+Proud::AppendTextOut(parameterString,subType);	
+	parameterString += L", ";	
+Proud::AppendTextOut(parameterString,msg);	
+	parameterString += L", ";	
+parameterString = parameterString.Left(parameterString.GetLength() - 2); // 끝의 콤마를 제거한다.
+NotifyCallFromStub((Proud::RmiID)Rmi_SendMessage, RmiName_SendMessage,parameterString);
+
+				m_core->Viz_NotifyRecvToStub(remote, (Proud::RmiID)Rmi_SendMessage, RmiName_SendMessage, parameterString);
+			}
+			else if(!m_internalUse)
+			{
+				m_core->Viz_NotifyRecvToStub(remote, (Proud::RmiID)Rmi_SendMessage, RmiName_SendMessage, L"");
+			}
+			
+			DWORD __t0 = 0;
+			if(!m_internalUse && m_enableStubProfiling)
+			{
+				Proud::BeforeRmiSummary summary;
+				summary.m_rmiID = (Proud::RmiID)Rmi_SendMessage;
+				summary.m_rmiName = RmiName_SendMessage;
+				summary.m_hostID = remote;
+				summary.m_hostTag = hostTag;
+				BeforeRmiInvocation(summary);
+				__t0 = ::GetTickCount();
+			}
+			
+			// 본 메서드를 호출한다.
+			bool __ret=SendMessage (remote,ctx ,msgType,subType,msg );
+			
+			if(__ret==false)
+			{
+				// 오류. 사용자가 구현하지 않은 RMI 함수를 호출했음.
+				m_core->ShowNotImplementedRmiWarning(RmiName_SendMessage);
+			}
+			
+			if(!m_internalUse && m_enableStubProfiling)
+			{
+				Proud::AfterRmiSummary summary;
+				summary.m_rmiID = (Proud::RmiID)Rmi_SendMessage;
+				summary.m_rmiName = RmiName_SendMessage;
+				summary.m_hostID = remote;
+				summary.m_hostTag = hostTag;
+				summary.m_elapsedTime = ::GetTickCount() - __t0;
+				AfterRmiInvocation(summary);
+			}
+		}
+		break;
 case Rmi_ConsoleString:
 		{
 			Proud::RmiContext ctx;
@@ -103,10 +166,15 @@ ___fail:
 // Rmi name 선언
 // Rmi profiler 등 Rmi name을 가리키는 unique pointer이다. 이것이 있으면 strcmp 등을 쓰지 말고 바로 Rmi name pointer 값으로 name 매칭을 할 수 있다.
 #ifndef HIDE_RMI_NAME_STRING
+LPCWSTR Stub::RmiName_SendMessage=L"SendMessage";
+#else
+LPCWSTR Stub::RmiName_SendMessage=L"";
+#endif
+LPCWSTR Stub::RmiName_First=RmiName_SendMessage;
+    #ifndef HIDE_RMI_NAME_STRING
 LPCWSTR Stub::RmiName_ConsoleString=L"ConsoleString";
 #else
 LPCWSTR Stub::RmiName_ConsoleString=L"";
 #endif
-LPCWSTR Stub::RmiName_First=RmiName_ConsoleString;
-    }
+}
 

@@ -37,6 +37,7 @@ namespace dbg
 		// DebugMonitor Method
 		//---------------------------------------------------------------
 		void Message( int message );
+		void Message( int msgType, int subType, const TCHAR *msg );
 
 	};
 };

@@ -93,18 +93,24 @@ void CTabConsolWindow::AddMessage(eMsgType type, int movieID, const TCHAR *str)
 	{
 	case General:
 		m_MsgList.AddString( str );
+		if (m_MsgList.GetCount() > 200)
+			m_MsgList.DeleteItem(0);
 		if (!m_NoScroll)
 			m_MsgList.SetCurSel(m_MsgList.GetCount()-1);
 		break;
 
 	case Network:
 		m_MsgList2.AddString( str );
+		if (m_MsgList2.GetCount() > 200)
+			m_MsgList2.DeleteItem(0);
 		if (!m_NoScroll)
 			m_MsgList2.SetCurSel(m_MsgList2.GetCount()-1);
 		break;
 
 	case UI:
 		m_MsgList3.AddString( str );
+		if (m_MsgList3.GetCount() > 200)
+			m_MsgList3.DeleteItem(0);
 		if (!m_NoScroll)
 			m_MsgList3.SetCurSel(m_MsgList3.GetCount()-1);
 		break;

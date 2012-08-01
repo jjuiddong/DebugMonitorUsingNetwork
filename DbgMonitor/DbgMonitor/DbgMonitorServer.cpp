@@ -142,4 +142,8 @@ void CDbgMonitorServer::Trace_Network( const TCHAR* msg )
 	for (int i=0; i < m_Clients.GetCount(); ++i)
 		m_pProxy->ConsoleString(m_Clients[ i], RmiContext::ReliableSend, dbg::Console_Network, 0, Proud::String(msg) );
 }
-
+void CDbgMonitorServer::Message( int msgType, int subType, const TCHAR *msg )
+{
+	for (int i=0; i < m_Clients.GetCount(); ++i)
+		m_pProxy->SendMessage(m_Clients[ i], RmiContext::ReliableSend, msgType, subType, Proud::String(msg) );
+}

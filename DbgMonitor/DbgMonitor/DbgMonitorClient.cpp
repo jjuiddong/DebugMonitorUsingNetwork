@@ -149,3 +149,8 @@ void CDbgMonitorClient::Message( int message )
 	if (m_pProxy)
 		m_pProxy->Message( Proud::HostID_Server, Proud::RmiContext::ReliableSend, message );
 }
+void CDbgMonitorClient::Message( int msgType, int subType, const TCHAR *msg )
+{
+	if (m_pProxy)
+		m_pProxy->SendMessage( Proud::HostID_Server, Proud::RmiContext::ReliableSend, msgType, subType, Proud::String(msg) );
+}
